@@ -93,7 +93,7 @@ function displayData(element , value = null , typeOfError = 'log'){
         case errorType.LOG : 
             if(value)  return console.log(element, value);
             return console.log(element);
-        case errorType.LOG :
+        case errorType.ERROR :
             if(value)  return console.error(element, value);
             return console.error(element);
     }
