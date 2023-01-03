@@ -16,21 +16,50 @@ let userSentenceCp = userSentence;
 let defaultNumber  = Number.parseInt(userSentence.match(/\d+/)[0]);
 let numberInString = defaultNumber
 let sentence       = "Take {number} down, pass it around";
-let decrement    = 1;
+let soundStrings   = ["{number} bottles of beer","{number} bottles of beer on the wall","0 bottle of beer on the wall"];
+let decrement      = 0;
+
 
 // instruction loop
-while(numberInString != 0){
 
-    userSentenceCp = userSentence.replace(/[0-9][0-9]/,numberInString);
-    displayData(userSentenceCp);
+while(numberInString != 0){
+    
+    if(decrement == 0) {
+        displayData(userSentenceCp);
+        displayData(soundStrings[0].replace("{number}",numberInString));
+    }
+
     const instance  = formatElement(numberInString);
 
-    if(instance  >= defaultNumber) break;
-    
-    displayData('instance',instance);
-    //console.log("decrementor",decrementElement());
-    numberInString = numberInString -1;
+    if(numberInString < 0)  break;
+
+
+    //userSentenceCp = "{number} bottles of beer on the wall".replace(/[0-9]*/,numberInString);
+    userSentenceCp  = soundStrings[1].replace("{number}",numberInString)
+   
+
+   
+    displayData(userSentenceCp);
+    displayData(userSentenceCp+" ");
+    displayData(soundStrings[0].replace("{number}",numberInString));
+
+    instance[1];
+   
+    if(instance[0] > defaultNumber && typeof instance[0] != "number") {
+        displayData(soundStrings[2]);
+        break;
+    };
+
+    numberInString = numberInString - Number.parseInt(instance[0]);
+
+    if(numberInString < 0) {
+        displayData(soundStrings[2]);
+    }
+
+    //numberInString = 0;
+  
 }
+
 
 /**
  * @description string formatter function
@@ -38,25 +67,16 @@ while(numberInString != 0){
  * @returns String
  */
 
-function formatElement(elementSize){
-    const instance = getInstanceOfElement(elementSize);
-    if(instance > 1)  {
-        displayData(sentence.replace("{number}",instance).replace("it","them"));
-        return instance
-    } 
-    displayData(sentence.replace("{number}",instance))
-    return instance;
+function formatElement(currentIteration){
+
+    const instance = decrementElement();
+
+    if(instance > 1)  
+      return [instance, displayData(sentence.replace("{number}",instance).replace("it","them"))]
+
+    return [instance, displayData(sentence.replace("{number}",instance))];
 }
 
-/**
- * @description function de retour d'instance
- * @param  elementSize  : Number
- * @returns 
- */
-
-function getInstanceOfElement(elementSize) {
-    return  (defaultNumber - elementSize == 0) ? 1 : defaultNumber - elementSize  ;
-}
 
 
 /**
@@ -64,14 +84,8 @@ function getInstanceOfElement(elementSize) {
  * @returns 
  */
 
-function decrementElement(){
-
-   if(decrement <= defaultNumber) {
-    if(decrement == 1)  return  decrement  = decrement + 1;
-    return decrement = decrement + 2;
-   }
-  
-   numberInString = 0;
+function decrementElement(currentElement){
+   return  (currentElement==defaultNumber) ? decrement = 0 :  decrement = decrement+1;
 }
 
 
