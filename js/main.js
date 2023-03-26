@@ -10,7 +10,7 @@
  * @param  sentence  : Number
  */
 
-//declaration des variables
+//declaration of variables
 let userSentence   = prompt("Put your lyrics");
 let userSentenceCp = userSentence;
 let defaultNumber  = Number.parseInt(userSentence.match(/\d+/)[0]);
